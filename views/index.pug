@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  if data
+    .row
+      .col-sm-3
+        a(href=data.home_page_url)
+          img(style="width:60px;" src=data.favicon)
+        hr
+        p
+          a(href=data.home_page_url)
+            b=data.title
+        p= data.description
+        p
+          em
+            | A feed by 
+            = data.author.name
+        hr
+      .col-sm-9
+        if data.items
+          for i in data.items
+            h1(style="margin-top:0;")= i.title
+            p
+              | Posted on 
+              = moment(i.createTime).format("YYYY-MM-DD")
+            p!= i.content_html
+            hr
+  else
+    h1(style="margin-top:0;") Welcome to JSON Feed Viewer!
+    p.lead Browse through the showcased JSON feeds below, or type in a JSON feed URL above.
+    hr
+    if showcaseFeeds
+      .row
+        for showcaseFeed in showcaseFeeds
+          .col-sm-6.col-md-4.col-lg-3
+            div.panel.panel-default
+              .panel-body
+                a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
+                  img(style="max-width:60px;" src=showcaseFeed.favicon)
+                h3
+                  a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
+                    b=showcaseFeed.title
+                p= showcaseFeed.description
+                if showcaseFeed.author && showcaseFeed.author.name
+                  p
+                    em
+                      | A feed by 
+                      = showcaseFeed.author.name
+                a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
+                  .btn.btn-success.btn-sm Read feed
