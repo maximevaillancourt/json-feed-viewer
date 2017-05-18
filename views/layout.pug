@@ -100,10 +100,13 @@ html
                   li
                     a(href='#') Separated link
     .container
+
       +flash-messages(messages)
       block content
 
     footer
       hr
       .container.text-center
-        | Made by Maxime Vaillancourt in Sherbrooke, Canada
+        | Made by 
+        a(target="_blank" href="https://twitter.com/vaillancourtmax") Maxime Vaillancourt
+        |  in Sherbrooke, Canada
