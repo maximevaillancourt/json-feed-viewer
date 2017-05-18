@@ -5,8 +5,7 @@ block content
     .row
       .col-sm-3
         a(href=data.home_page_url)
-          img(style="width:60px;" src=data.favicon)
-        hr
+          img(style="margin-bottom:20px; max-width:50px;" src=(data.icon ? data.icon : data.favicon))
         p
           a(href=data.home_page_url)
             b=data.title
@@ -31,16 +30,16 @@ block content
                 - var dateModified = moment(i.date_modified)
 
               | Posted on 
-              = datePublished.format("YYYY-MM-DD hh:mm")
+              = datePublished.format("YYYY-MM-DD HH:mm")
               if dateModified && !dateModified.isSame(datePublished, "minute")
                 span
                   | , modified 
                   if datePublished.isSame(dateModified, 'day')
                     | at 
-                    = dateModified.format("hh:mm")
+                    = dateModified.format("HH:mm")
                   else
                     | on 
-                    = dateModified.format("YYYY-MM-DD hh:mm")
+                    = dateModified.format("YYYY-MM-DD HH:mm")
 
             p!= i.content_html
             hr
@@ -55,7 +54,7 @@ block content
             div.panel.panel-default
               .panel-body
                 a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
-                  img(style="max-width:60px;" src=showcaseFeed.favicon)
+                  img(style="max-width:50px;" src=(showcaseFeed.icon ? showcaseFeed.icon : showcaseFeed.favicon))
                 h3
                   a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
                     b=showcaseFeed.title
