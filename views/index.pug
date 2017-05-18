@@ -3,17 +3,41 @@ extends layout
 block content
   if data
     .row
+      .col-md-3
+        p.lead(style="padding-top:1em")
+          img(src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Parentesi_Graffe.svg" style="vertical-align:middle; margin-right:0.3em; height:1.2em;")
+          span(style="vertical-align:middle;")
+            a(href="/")
+              b JSON Feed Viewer
+      .col-md-9
+        span Load another JSON feed...
+        form.form-inline(method="get")
+          .input-group
+            input.form-control(type='text', name="feed_url", placeholder='Feed URL')
+            span.input-group-btn
+              button.btn.btn-success(type='submit') Go
+    hr
+    .row
       .col-sm-3
+        .small: b CURRENT FEED
+        br
         a(href=data.home_page_url)
-          img(style="margin-bottom:20px; max-width:50px;" src=(data.icon ? data.icon : data.favicon))
+          if data.icon
+            img(style="margin-bottom:20px; max-width:50px;" src=data.icon)
+          else if data.favicon
+            img(style="margin-bottom:20px; max-width:50px;" src=data.favicon)
+          else
+            img(style="margin-bottom:20px; max-width:100px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png")
+            
         p
           a(href=data.home_page_url)
             b=data.title
         p= data.description
-        p
-          em
-            | A feed by 
-            = data.author.name
+        if data.author && data.author.name
+          p
+            em
+              | A feed by 
+              = data.author.name
         hr
       .col-sm-9
         if data.items
@@ -44,8 +68,14 @@ block content
             p!= i.content_html
             hr
   else
-    h1(style="margin-top:0;") Welcome to JSON Feed Viewer!
+    h1 Welcome to JSON Feed Viewer!
     p.lead Browse through the showcased JSON feeds below, or type in a JSON feed URL above.
+    div
+      form(method="get")
+        .input-group
+          input.form-control(type='text', name="feed_url", placeholder='Feed URL')
+          span.input-group-btn
+            button.btn.btn-success(type='submit') Go
     hr
     if showcaseFeeds
       .row

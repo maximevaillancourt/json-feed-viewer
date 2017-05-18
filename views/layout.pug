@@ -38,69 +38,71 @@ html
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-  body(style="padding-top:100px")
-    nav.navbar.navbar-default.navbar-fixed-top
-      .container
-        // Brand and toggle get grouped for better mobile display
-        .navbar-header
-          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand(href='/') JSON Feed Viewer
-        // Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav
+  body(style="padding-top:1em")
+    //-
+      nav.navbar.navbar-default.navbar-fixed-top
+        .container
+          // Brand and toggle get grouped for better mobile display
+          .navbar-header
             //-
-              li.active
-                a(href='#')
-                  | Link 
-                  span.sr-only (current)
-              li
-                a(href='#') Link
-              li.dropdown
-                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                  | Dropdown 
-                  span.caret
-                ul.dropdown-menu
-                  li
-                    a(href='#') Action
-                  li
-                    a(href='#') Another action
-                  li
-                    a(href='#') Something else here
-                  li.divider(role='separator')
-                  li
-                    a(href='#') Separated link
-                  li.divider(role='separator')
-                  li
-                    a(href='#') One more separated link
-          form.navbar-form.navbar-left(method="get")
-            .input-group
-              input.form-control(type='text', name="feed_url", placeholder='Feed URL')
-              span.input-group-btn
-                button.btn.btn-success(type='submit') Go
-          //-
-            ul.nav.navbar-nav.navbar-right
-              li
-                a(href='#') Link
-              li.dropdown
-                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                  | Dropdown 
-                  span.caret
-                ul.dropdown-menu
-                  li
-                    a(href='#') Action
-                  li
-                    a(href='#') Another action
-                  li
-                    a(href='#') Something else here
-                  li.divider(role='separator')
-                  li
-                    a(href='#') Separated link
+              button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+            a.navbar-brand(href='/') JSON Feed Viewer
+          // Collect the nav links, forms, and other content for toggling
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav
+              //-
+                li.active
+                  a(href='#')
+                    | Link 
+                    span.sr-only (current)
+                li
+                  a(href='#') Link
+                li.dropdown
+                  a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                    | Dropdown 
+                    span.caret
+                  ul.dropdown-menu
+                    li
+                      a(href='#') Action
+                    li
+                      a(href='#') Another action
+                    li
+                      a(href='#') Something else here
+                    li.divider(role='separator')
+                    li
+                      a(href='#') Separated link
+                    li.divider(role='separator')
+                    li
+                      a(href='#') One more separated link
+            //-
+              form.navbar-form.navbar-left(method="get")
+                .input-group
+                  input.form-control(type='text', name="feed_url", placeholder='Feed URL')
+                  span.input-group-btn
+                    button.btn.btn-success(type='submit') Go
+            //-
+              ul.nav.navbar-nav.navbar-right
+                li
+                  a(href='#') Link
+                li.dropdown
+                  a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                    | Dropdown 
+                    span.caret
+                  ul.dropdown-menu
+                    li
+                      a(href='#') Action
+                    li
+                      a(href='#') Another action
+                    li
+                      a(href='#') Something else here
+                    li.divider(role='separator')
+                    li
+                      a(href='#') Separated link
     .container
-
       +flash-messages(messages)
       block content
 

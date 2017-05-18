@@ -16,15 +16,21 @@ router.get('/',
         if(requestResponse && requestResponse.headers && requestResponse.headers["content-type"].indexOf("application/json") > -1){
           var data = JSON.parse(rawData);
           res.locals.data = data;
+          console.log("feed url request complete")
           req.validFeed = true
+          return next();
         }
         else{
           req.flash("error", "Invalid JSON feed.")
+          return getShowcasedFeeds();
         }
       });
     }
+    else{
+      return getShowcasedFeeds();
+    }
 
-    if(!req.validFeed){
+    function getShowcasedFeeds(){
       var showcaseFeedUrls = [
         //"https://jsonfeed.org/feed.json",
         "https://daringfireball.net/feeds/json",
@@ -42,6 +48,7 @@ router.get('/',
             if(requestResponse && requestResponse.headers && requestResponse.headers["content-type"].indexOf("application/json") > -1){
               var data = JSON.parse(rawData);
               res.locals.showcaseFeeds.push(data);
+              console.log("loaded one showcased feed")
               callback();
             }
             else{
@@ -56,12 +63,15 @@ router.get('/',
         if(err){
           req.flash("error", "Invalid JSON feed.")
         }
+        console.log("showcased feeds loaded")
         return next();
       });
     }
+
   },
 
   function render(req, res, next) {
+    console.log("rendering page")
     return res.render("index")
   }
 
