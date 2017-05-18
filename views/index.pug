@@ -19,10 +19,29 @@ block content
       .col-sm-9
         if data.items
           for i in data.items
-            h1(style="margin-top:0;")= i.title
+            if i.external_url
+              a(target="_blank" href=i.external_url)
+                h1(style="margin-top:0;")= i.title
+            else
+              h1(style="margin-top:0;")= i.title
             p
+              if i.date_published
+                - var datePublished = moment(i.date_published)
+              if i.date_modified
+                - var dateModified = moment(i.date_modified)
+
               | Posted on 
-              = moment(i.createTime).format("YYYY-MM-DD")
+              = datePublished.format("YYYY-MM-DD hh:mm")
+              if dateModified && !dateModified.isSame(datePublished, "minute")
+                span
+                  | , modified 
+                  if datePublished.isSame(dateModified, 'day')
+                    | at 
+                    = dateModified.format("hh:mm")
+                  else
+                    | on 
+                    = dateModified.format("YYYY-MM-DD hh:mm")
+
             p!= i.content_html
             hr
   else
