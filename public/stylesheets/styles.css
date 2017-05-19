@@ -27,3 +27,7 @@ footer{
   background: #18bc9c !important;
   color: white;
 }
+
+body{
+  border-top:5px solid #18bc9c;
+}
