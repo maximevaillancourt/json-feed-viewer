@@ -97,7 +97,12 @@ block content
               div.panel.panel-default.panel-showcase
                 .panel-body
                   //a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
-                  img(style="max-width:50px;" src=(showcaseFeed.icon ? showcaseFeed.icon : showcaseFeed.favicon))
+                  if showcaseFeed.icon
+                    img(style="margin-bottom:20px; max-width:50px;" src=showcaseFeed.icon)
+                  else if showcaseFeed.favicon
+                    img(style="margin-bottom:20px; max-width:50px;" src=showcaseFeed.favicon)
+                  else
+                    img(style="margin-bottom:0px; max-width:80px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png")
                   h3
                     //a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
                     b=showcaseFeed.title

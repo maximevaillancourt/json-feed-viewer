@@ -16,7 +16,6 @@ router.get('/',
         if(requestResponse && requestResponse.headers && requestResponse.headers["content-type"].indexOf("application/json") > -1){
           var data = JSON.parse(rawData);
           res.locals.data = data;
-          console.log("feed url request complete")
           req.validFeed = true
           return next();
         }
@@ -39,6 +38,7 @@ router.get('/',
         "https://www.stuartbreckenridge.com/feed.json",
         "https://applefocus.com/feed.json",
         "http://www.downes.ca/news/OLDaily.json",
+        "https://www.raymondcamden.com/jsonfeed/index.json",
         //"https://pxlnv.com/feed/json/",
         //"http://uncrate.com/feed.json",
         //"http://www.vienna-rb.at/new-blog/feed.json"
@@ -77,7 +77,30 @@ router.get('/',
   },
 
   function render(req, res, next) {
-    console.log("rendering page")
+
+    function shuffle(array) {
+      var currentIndex = array.length, temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+    }
+
+    if(res.locals.showcaseFeeds){
+      shuffle(res.locals.showcaseFeeds)
+    }
+    
     return res.render("index")
   }
 
