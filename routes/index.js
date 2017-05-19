@@ -20,7 +20,7 @@ router.get('/',
           return next();
         }
         else{
-          //req.flash("error", "Invalid JSON feed.")
+          req.flash("error", "Invalid JSON feed.")
           return getShowcasedFeeds();
         }
       });
@@ -68,7 +68,7 @@ router.get('/',
 
       async.parallel(calls, function(err, result) {
         if(err){
-          req.flash("error", "Invalid JSON feed.")
+          //req.flash("error", "Invalid JSON feed.")
         }
         return next();
       });
@@ -100,7 +100,7 @@ router.get('/',
     if(res.locals.showcaseFeeds){
       shuffle(res.locals.showcaseFeeds)
     }
-    
+
     return res.render("index")
   }
 
