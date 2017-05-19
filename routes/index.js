@@ -11,7 +11,7 @@ router.get('/',
     req.validFeed = false;
 
     if(req.query.feed_url){
-      request(req.query.feed_url, function(err, requestResponse, rawData) {
+      request(req.query.feed_url.trim(), function(err, requestResponse, rawData) {
 
         if(requestResponse && requestResponse.headers && requestResponse.headers["content-type"].indexOf("application/json") > -1){
           var data = JSON.parse(rawData);
@@ -21,7 +21,7 @@ router.get('/',
           return next();
         }
         else{
-          req.flash("error", "Invalid JSON feed.")
+          //req.flash("error", "Invalid JSON feed.")
           return getShowcasedFeeds();
         }
       });
@@ -32,9 +32,16 @@ router.get('/',
 
     function getShowcasedFeeds(){
       var showcaseFeedUrls = [
-        //"https://jsonfeed.org/feed.json",
+        "https://jsonfeed.org/feed.json",
         "https://daringfireball.net/feeds/json",
-        "http://inessential.com/feed.json"
+        "http://inessential.com/feed.json",
+        "http://phish.net/feed.json",
+        "https://www.stuartbreckenridge.com/feed.json",
+        "https://applefocus.com/feed.json",
+        "http://www.downes.ca/news/OLDaily.json",
+        //"https://pxlnv.com/feed/json/",
+        //"http://uncrate.com/feed.json",
+        //"http://www.vienna-rb.at/new-blog/feed.json"
       ]
 
       res.locals.showcaseFeeds = []
@@ -43,12 +50,12 @@ router.get('/',
 
       showcaseFeedUrls.forEach(function(url){
         calls.push(function(callback) {
-          request(url, function(err, requestResponse, rawData) {
+          request(url.trim(), function(err, requestResponse, rawData) {
 
             if(requestResponse && requestResponse.headers && requestResponse.headers["content-type"].indexOf("application/json") > -1){
               var data = JSON.parse(rawData);
               res.locals.showcaseFeeds.push(data);
-              console.log("loaded one showcased feed")
+
               callback();
             }
             else{
@@ -63,7 +70,6 @@ router.get('/',
         if(err){
           req.flash("error", "Invalid JSON feed.")
         }
-        console.log("showcased feeds loaded")
         return next();
       });
     }

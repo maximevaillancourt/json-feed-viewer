@@ -48,24 +48,36 @@ block content
             else
               h1(style="margin-top:0;")= i.title
             p
+              if i.url
+                a(target="_blank" href=i.url)
+                  | Permalink
+                  i(style="margin-left:0.4em;" class="fa fa-external-link" aria-hidden="true")
               if i.date_published
                 - var datePublished = moment(i.date_published)
               if i.date_modified
                 - var dateModified = moment(i.date_modified)
 
-              | Posted on 
-              = datePublished.format("YYYY-MM-DD HH:mm")
-              if dateModified && !dateModified.isSame(datePublished, "minute")
-                span
-                  | , modified 
-                  if datePublished.isSame(dateModified, 'day')
-                    | at 
-                    = dateModified.format("HH:mm")
-                  else
-                    | on 
-                    = dateModified.format("YYYY-MM-DD HH:mm")
+              if datePublished
+                |  - Posted on 
+                = datePublished.format("YYYY-MM-DD HH:mm")
+                if dateModified && !dateModified.isSame(datePublished, "minute")
+                  span
+                    | , modified 
+                    if datePublished.isSame(dateModified, 'day')
+                      | at 
+                      = dateModified.format("HH:mm")
+                    else
+                      | on 
+                      = dateModified.format("YYYY-MM-DD HH:mm")
 
-            p!= i.content_html
+            if i.image
+              img(src=i.image style="margin:2em 0; max-width:100%; max-height:25em")
+            else if i.banner_image
+              img(src=i.banner_image style="margin:2em 0; max-width:100%; max-height:25em")
+            if i.content_html
+              p!= i.content_html
+            else if i.content_text
+              p!= i.content_text
             hr
   else
     h1 Welcome to JSON Feed Viewer!
@@ -78,21 +90,33 @@ block content
             button.btn.btn-success(type='submit') Go
     hr
     if showcaseFeeds
-      .row
+      .row-showcase
         for showcaseFeed in showcaseFeeds
-          .col-sm-6.col-md-4.col-lg-3
-            div.panel.panel-default
-              .panel-body
-                a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
+          a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
+            div.item-showcase
+              div.panel.panel-default.panel-showcase
+                .panel-body
+                  //a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
                   img(style="max-width:50px;" src=(showcaseFeed.icon ? showcaseFeed.icon : showcaseFeed.favicon))
-                h3
-                  a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
+                  h3
+                    //a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
                     b=showcaseFeed.title
-                p= showcaseFeed.description
-                if showcaseFeed.author && showcaseFeed.author.name
-                  p
-                    em
-                      | A feed by 
-                      = showcaseFeed.author.name
-                a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
+                  p= showcaseFeed.description
+                  if showcaseFeed.author && showcaseFeed.author.name
+                    p
+                      em
+                        | A feed by 
+                        = showcaseFeed.author.name
                   .btn.btn-success.btn-sm Read feed
+
+        div.item-showcase
+          div.panel.panel-default.panel-showcase.panel-featured-here
+            .panel-body
+              <i class="fa fa-plus-square-o fa-4x" aria-hidden="true"></i>
+              h3(style="margin-top:0.5em")
+                //a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
+                b Your feed here?
+              p
+                a.btn.btn-primary.btn-sm(target="_blank" href="https://twitter.com/vaillancourtmax") 
+                  | Reach out on Twitter!
+                  i(style="margin-left:0.4em;" class="fa fa-external-link" aria-hidden="true")
