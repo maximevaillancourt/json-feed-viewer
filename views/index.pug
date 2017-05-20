@@ -1,6 +1,11 @@
 extends layout
 
 block content
+  script.
+    $(document).ready(function () {
+      $('#feed-content style').remove()
+      $("table").addClass("table")
+    });
   if data
     .row
       .col-md-3
@@ -71,13 +76,15 @@ block content
                       = dateModified.format("YYYY-MM-DD HH:mm")
 
             if i.image
-              img(src=i.image style="margin:2em 0; max-width:100%; max-height:25em")
+              img(src=i.image style="margin:2em 0; max-height:25em")
             else if i.banner_image
-              img(src=i.banner_image style="margin:2em 0; max-width:100%; max-height:25em")
-            if i.content_html
-              p!= i.content_html
-            else if i.content_text
-              p!= i.content_text
+              img(src=i.banner_image style="margin:2em 0; max-height:25em")
+
+            #feed-content
+              if i.content_html
+                p!= i.content_html
+              else if i.content_text
+                p!= i.content_text
             hr
   else
     h1 Welcome to JSON Feed Viewer!
