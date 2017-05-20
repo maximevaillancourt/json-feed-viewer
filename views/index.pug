@@ -120,15 +120,15 @@ block content
             div.item-showcase
               div.panel.panel-default.panel-showcase
                 .panel-body
-                  //a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
+                  //-a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
                   if showcaseFeed.icon
-                    img(style="margin-bottom:20px; max-width:50px;" src=showcaseFeed.icon)
+                    img(style="max-width:50px;" src=showcaseFeed.icon)
                   else if showcaseFeed.favicon
-                    img(style="margin-bottom:20px; max-width:50px;" src=showcaseFeed.favicon)
+                    img(style="max-width:50px;" src=showcaseFeed.favicon)
                   else
                     img(style="margin-bottom:0px; max-width:80px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png")
                   h3
-                    //a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
+                    //-a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
                     b=showcaseFeed.title
                   p= showcaseFeed.description
                   if showcaseFeed.author && showcaseFeed.author.name
@@ -143,7 +143,7 @@ block content
             .panel-body
               <i class="fa fa-plus-square-o fa-4x" aria-hidden="true"></i>
               h3(style="margin-top:0.5em")
-                //a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
+                //-a(href="/?feed_url="+encodeURIComponent(showcaseFeed.feed_url))
                 b Your feed here?
               p
                 a.btn.btn-primary.btn-sm(target="_blank" href="https://twitter.com/vaillancourtmax") 
