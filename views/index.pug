@@ -87,14 +87,22 @@ block content
                 p!= i.content_text
             hr
   else
-    h1 Welcome to JSON Feed Viewer!
+    h1
+      img(src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Parentesi_Graffe.svg" style="vertical-align:middle; margin-right:0.2em; height:1em;")
+      span(style="vertical-align:middle;") JSON Feed Viewer
     p.lead Browse through the showcased JSON feeds below, or type in a JSON feed URL below.
-    div
+    div(style="margin-bottom:1.2em")
       form(method="get")
         .input-group
           input.form-control(type='text', name="feed_url", placeholder='Feed URL')
           span.input-group-btn
             button.btn.btn-success(type='submit') Go
+    p
+      i.text-danger(style="margin-right:0.4em;" class="fa fa-heart" aria-hidden="true")
+      | Thanks for being here! If this tool helps you today, 
+      span
+        a(href="https://www.paypal.me/vaillancourtmax/5usd") consider donating
+      | . &ndash;Maxime
     hr
     if showcaseFeeds
       .row-showcase
