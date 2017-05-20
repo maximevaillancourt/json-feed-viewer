@@ -6,12 +6,15 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require("express-flash");
-var Promise = require("bluebird")
+var Promise = require("bluebird");
+var compression = require('compression');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+app.use(compression())
+
 var sessionStore = new session.MemoryStore;
 app.locals.moment = require('moment');
 
