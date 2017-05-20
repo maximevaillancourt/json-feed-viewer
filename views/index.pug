@@ -87,6 +87,13 @@ block content
                 p!= i.content_text
             hr
   else
+    p.text-right
+      i.text-info(style="margin-right:0.4em;" class="fa fa-question-circle" aria-hidden="true")
+      | What is a JSON feed? 
+      span
+        a(target="_blank" href="https://jsonfeed.org/2017/05/17/announcing_json_feed")
+          | Learn more
+          i(style="margin-left:0.4em;" class="fa fa-external-link" aria-hidden="true")
     h1
       img(src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Parentesi_Graffe.svg" style="vertical-align:middle; margin-right:0.2em; height:1em;")
       span(style="vertical-align:middle;") JSON Feed Viewer
