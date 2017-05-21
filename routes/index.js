@@ -44,6 +44,7 @@ router.get('/',
         "http://troz.net/feed.json",
         "https://www.jordanmerrick.com/feed.json",
         "http://gaddgict.com/feed/json",
+        "https://colterreed.com/feed/json",
         //"https://pxlnv.com/feed/json/",
         //"http://uncrate.com/feed.json",
         //"http://www.vienna-rb.at/new-blog/feed.json"
