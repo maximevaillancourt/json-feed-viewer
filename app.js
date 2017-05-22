@@ -11,6 +11,7 @@ var bodyParser = require('body-parser');
 var flash = require("express-flash");
 var Promise = require("bluebird");
 var compression = require('compression');
+var helmet = require('helmet')
 
 /*---------------------------------------------------------------------
   App Setup
@@ -29,6 +30,7 @@ app.set('view engine', 'pug');
 ---------------------------------------------------------------------*/
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(compression())
+app.use(helmet())
 app.use(cookieParser('secret'));
 app.use(session({
     cookie: { maxAge: 60000 },
