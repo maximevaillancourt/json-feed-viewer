@@ -1,3 +1,6 @@
+/*---------------------------------------------------------------------
+  Dependencies
+---------------------------------------------------------------------*/
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -9,11 +12,10 @@ var flash = require("express-flash");
 var Promise = require("bluebird");
 var compression = require('compression');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-
+/*---------------------------------------------------------------------
+  App Setup
+---------------------------------------------------------------------*/
 var app = express();
-app.use(compression())
 
 var sessionStore = new session.MemoryStore;
 app.locals.moment = require('moment');
@@ -22,8 +24,11 @@ app.locals.moment = require('moment');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// uncomment after placing your favicon in /public
+/*---------------------------------------------------------------------
+  Middleware
+---------------------------------------------------------------------*/
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(compression())
 app.use(cookieParser('secret'));
 app.use(session({
     cookie: { maxAge: 60000 },
@@ -39,9 +44,15 @@ app.use(cookieParser('secret'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
-app.use('/', index);
-app.use('/users', users);
+/*---------------------------------------------------------------------
+  Routes
+---------------------------------------------------------------------*/
+app.use('/', require('./routes/index'));
+app.use('/feed', require('./routes/feed'));
 
+/*---------------------------------------------------------------------
+  Error handlers
+---------------------------------------------------------------------*/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -60,4 +71,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+/*---------------------------------------------------------------------
+  Exports
+---------------------------------------------------------------------*/
 module.exports = app;
