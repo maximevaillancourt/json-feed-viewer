@@ -24,7 +24,7 @@ npm start
 
 ### Prerequisites
 
-The app was tested on the following configuration.
+The app was tested on the following configuration:
 
 - Ubuntu 16.04
 - NPM
@@ -36,7 +36,7 @@ The app is currently "Heroku deployment"-ready. Feel free to deploy it through o
 
 ## Contributing
 
-Simply [create a new pull request](https://github.com/maximevaillancourt/json-feed-viewer/compare)! :)
+Simply fork this repo, then create a new pull request. Thanks for contributing! :)
 
 ## Built With
 
