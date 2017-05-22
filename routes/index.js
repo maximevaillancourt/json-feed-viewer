@@ -12,6 +12,7 @@ var utils = require("../helpers/utils")
 ---------------------------------------------------------------------*/
 router.get('/',
 
+  // backward compatibility with previously used URL (...herokuapp.com/?feed_url=http...)
   function redirectToFeed(req, res, next){
     if(req.query.feed_url){
       return res.redirect("/feed/?url="+encodeURIComponent(req.query.feed_url.trim()))
