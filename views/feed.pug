@@ -18,7 +18,7 @@ block content
         span Load another feed...
         form.form(method="get" action="/feed")
           .input-group
-            input.form-control(type='text', name="url", placeholder='Feed URL')
+            input.form-control(type='text', name="url", placeholder='Feed URL (.json, .rss, .atom)')
             span.input-group-btn
               button.btn.btn-success(type='submit') Go
     +flash-messages(messages)
@@ -32,8 +32,6 @@ block content
             img(style="margin-bottom:20px; max-width:50px;" src=data.icon)
           else if data.favicon
             img(style="margin-bottom:20px; max-width:50px;" src=data.favicon)
-          else
-            img(style="margin-bottom:20px; max-width:100px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png")
             
         p
           a(href=data.home_page_url)

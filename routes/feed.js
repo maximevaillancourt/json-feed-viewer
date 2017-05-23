@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 var request = require("request");
 var utils = require("../helpers/utils")
+var redisCache = require('redis').createClient(process.env.REDIS_URL);
 
 /*---------------------------------------------------------------------
   Feed Display GET
@@ -49,8 +50,16 @@ router.get('/',
             }
             else{
               // feed is ready to be displayed!
+              parsedJson["fetched_at"] = new Date();
+              if(!parsedJson.feed_url){
+                parsedJson.feed_url = req.query.url.toLowerCase().trim()
+              }
               res.locals.data = parsedJson;
-              return next();
+
+              // push data to the redis cache (expires after 72 hours)
+              redisCache.setex(encodeURIComponent(req.query.url.toLowerCase().trim()), 60*60*72, JSON.stringify(parsedJson), function(){
+                return next();
+              })
             }
           }
 
@@ -89,8 +98,17 @@ router.get('/',
                   }
                   else{
                     // feed is ready to be displayed!
+                    parsedConvertedJson["fetched_at"] = new Date();
+                    if(!parsedConvertedJson.feed_url){
+                      parsedConvertedJson.feed_url = req.query.url.toLowerCase().trim()
+                    }
                     res.locals.data = parsedConvertedJson;
-                    return next();
+                    console.log(parsedConvertedJson)
+
+                    // push data to the redis cache (expires after 72 hours)
+                    redisCache.setex(encodeURIComponent(req.query.url.toLowerCase().trim()), 60*60*72, JSON.stringify(parsedConvertedJson), function(){
+                      return next();
+                    })
                   }
                 }
                 else{
