@@ -43,4 +43,9 @@ module.exports.showcasedFeedsUrls = [
   "https://colterreed.com/feed/json",
   "https://ndarville.com/feed.json",
   "http://thaddeushunt.com/feed/json",
+  "http://andrewjaffe.net/blog/feed.json",
+  "https://christine.website/blog.json",
+  "https://www.dwell.com/@dwell/json",
+  "http://uncrate.com/feed.json",
+  "http://macosicongallery.com/feed.json",
 ]
