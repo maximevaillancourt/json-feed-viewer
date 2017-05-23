@@ -65,7 +65,7 @@ block content
                           | Last fetched at 
                           if !dateFetched.isSame(dateNow, 'day')
                             | #{moment(showcaseFeed.fetched_at).format("YYYY-MM-DD")} 
-                          | #{moment(showcaseFeed.fetched_at).format("HH:mm")}
+                          | #{moment(showcaseFeed.fetched_at).format("HH:mm")} UTC
 
             div
               div.panel.panel-default.panel-showcase.panel-featured-here
@@ -104,4 +104,4 @@ block content
                         | Last fetched at 
                         if !dateFetched.isSame(dateNow, 'day')
                           | #{moment(recentFeed.fetched_at).format("YYYY-MM-DD")} 
-                        | #{moment(recentFeed.fetched_at).format("HH:mm")}
+                        | #{moment(recentFeed.fetched_at).format("HH:mm")} UTC
