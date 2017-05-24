@@ -80,7 +80,7 @@ router.get('/',
           parsedFeeds.sort(function(a,b){
             return new Date(b.fetched_at) - new Date(a.fetched_at);
           });
-          parsedFeeds = parsedFeeds.slice(0,9)
+          parsedFeeds = parsedFeeds.slice(0,24)
           res.locals.latestFeeds = parsedFeeds
           return next();
         });
