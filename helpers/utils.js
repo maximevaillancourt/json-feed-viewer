@@ -49,4 +49,5 @@ module.exports.showcasedFeedsUrls = [
   "http://uncrate.com/feed.json",
   "http://macosicongallery.com/feed.json",
   "http://iosicongallery.com/feed.json",
+  "http://hipsterpixel.co/feed.json",
 ]
