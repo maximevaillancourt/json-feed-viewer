@@ -48,4 +48,5 @@ module.exports.showcasedFeedsUrls = [
   "https://www.dwell.com/@dwell/json",
   "http://uncrate.com/feed.json",
   "http://macosicongallery.com/feed.json",
+  "http://iosicongallery.com/feed.json",
 ]
