@@ -16,6 +16,10 @@ router.get('/',
 
     // user has typed in something
     if(req.query.url){
+      if(req.query.url.indexOf("http") == -1){
+        req.query.url = "http://" + req.query.url
+      }
+      
       request(req.query.url.trim(), function(err, requestResponse, rawData) {
 
         // we have a response!
