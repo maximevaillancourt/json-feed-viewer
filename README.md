@@ -13,23 +13,23 @@ The app was tested on the following configuration:
 - Node v6.2.0
 - Redis 3.2.9
 
-0. Install Redis
+### 0. Install Redis
 
 Install a local Redis server by following [these instructions](https://redis.io/topics/quickstart).
 
-1. Clone the repo
+### 1. Clone the repo
 
 ```
 git clone https://github.com/maximevaillancourt/json-feed-viewer.git
 ```
 
-2. Install dependencies
+### 2. Install dependencies
 
 ```
 cd json-feed-viewer && npm install
 ```
 
-3. Start the server
+### 3. Start the server
 
 ```
 npm start
