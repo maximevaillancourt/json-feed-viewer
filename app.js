@@ -1,6 +1,6 @@
-/*---------------------------------------------------------------------
+/**********************************************************************
   Dependencies
----------------------------------------------------------------------*/
+**********************************************************************/
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -9,13 +9,13 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require("express-flash");
-var Promise = require("bluebird");
 var compression = require('compression');
 var helmet = require('helmet')
+var sassMiddleware = require('node-sass-middleware')
 
-/*---------------------------------------------------------------------
+/**********************************************************************
   App Setup
----------------------------------------------------------------------*/
+**********************************************************************/
 var app = express();
 
 var sessionStore = new session.MemoryStore;
@@ -25,10 +25,9 @@ app.locals.moment = require('moment');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-/*---------------------------------------------------------------------
+/**********************************************************************
   Middleware
----------------------------------------------------------------------*/
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+**********************************************************************/
 app.use(compression())
 app.use(helmet())
 app.use(cookieParser('secret'));
@@ -43,18 +42,25 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser('secret'));
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
+app.use(sassMiddleware({
+    src: path.join(__dirname, 'sass'),
+    dest: path.join(__dirname, 'public/css'),
+    debug: true,
+    outputStyle: 'compressed',
+    prefix: '/css',
+}), express.static(path.join(__dirname, 'public')));
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-/*---------------------------------------------------------------------
+/**********************************************************************
   Routes
----------------------------------------------------------------------*/
+**********************************************************************/
 app.use('/', require('./routes/index'));
 app.use('/feed', require('./routes/feed'));
 
-/*---------------------------------------------------------------------
-  Error handlers
----------------------------------------------------------------------*/
+/**********************************************************************
+  Error Handlers
+**********************************************************************/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -73,7 +79,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-/*---------------------------------------------------------------------
+/**********************************************************************
   Exports
----------------------------------------------------------------------*/
+**********************************************************************/
 module.exports = app;

@@ -1,4 +1,4 @@
-include mixins/flash-messages
+include ../mixins/flash-messages
 
 doctype html
 html
@@ -11,25 +11,26 @@ html
 
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
 
-    link(rel="stylesheet" href="/css/bootswatch.min.css")
     link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel="stylesheet", integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin="anonymous")
-    link(rel="stylesheet" href="/css/styles.css")
+    link(rel="stylesheet" href="/css/main.css")
     
     script(src="/js/jquery-3.2.1.min.js")
     script(src="/js/bootstrap-3.3.7.min.js")
 
   body
     .container
+      include ../includes/header
+      hr
       block content
 
-    footer
+    footer.footer
       hr
       .container.text-center
         p
           | 2017 &ndash; Made by 
-          a(target="_blank" href="https://twitter.com/vaillancourtmax") Maxime Vaillancourt
+          a(target="_blank" href="https://maximevaillancourt.com/en") Maxime Vaillancourt
           |  in Sherbrooke, Canada
         p
           a(target="_blank" href="https://github.com/maximevaillancourt/json-feed-viewer")
             | View the source code on GitHub
-            i(style="margin-left:0.4em;" class="fa fa-external-link" aria-hidden="true")
+            i(class="fa fa-external-link" aria-hidden="true")

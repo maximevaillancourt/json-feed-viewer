@@ -1,107 +1,68 @@
-extends layout
+extends layouts/default
 
 block content
-  div
-    p.text-right
-      i.text-info(style="margin-right:0.4em;" class="fa fa-question-circle" aria-hidden="true")
-      | What is a JSON feed? 
-      span
-        a(target="_blank" href="https://jsonfeed.org/2017/05/17/announcing_json_feed")
-          | Learn more
-          i(style="margin-left:0.4em;" class="fa fa-external-link" aria-hidden="true")
-    h1(style="margin-top:0;")
-      img(src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Parentesi_Graffe.svg" style="vertical-align:middle; margin-right:0.2em; height:1em;")
-      span(style="vertical-align:middle;") JSON Feed Viewer
-    p.lead Browse through fresh feeds, or enter a feed URL below.
-    div(style="margin-bottom:1.2em")
-      form(method="get" action="/feed")
-        .input-group
-          input.form-control(type='text', name="url", placeholder='Feed URL (.json, .rss, .atom)')
-          span.input-group-btn
-            button.btn.btn-success(type='submit') Go
-    +flash-messages(messages)
-    .alert.alert-info
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      | You can now view RSS and Atom feeds as well thanks to 
-      a(target="_blank" href="https://feed2json.org/")
-        | Andrew Chilton's feed2json.org service
-        i(style="margin-left:0.4em;" class="fa fa-external-link" aria-hidden="true")
-      | . Try typing in a RSS or Atom feed URL above!
-    p
-      i.text-danger(style="margin-right:0.4em;" class="fa fa-heart" aria-hidden="true")
-      | Thanks for being here! If this tool helps you today, 
-      span
-        a(target="_blank" href="https://www.paypal.me/vaillancourtmax/5usd")
-          | consider donating
-          i(style="margin-left:0.4em;" class="fa fa-external-link" aria-hidden="true")
-      | . &ndash;Maxime
-    hr(style="margin:1em 0 2em")
-    .row
-      if showcasedFeeds
-        .col-sm-8
-          div(style="margin-bottom:3em")
-            h2(style="margin-top:0;") Showcased feeds
-            for showcaseFeed in showcasedFeeds
-              if showcaseFeed.feed_url
-                a(href="/feed/?url="+encodeURIComponent(showcaseFeed.feed_url))
-                  div.item-showcase
-                    div.panel.panel-default.panel-showcase
-                      .panel-body
-                        if showcaseFeed.icon
-                          img(style="display:inline; max-width:1.4em; vertical-align:middle; margin-right: 0.6em" src=showcaseFeed.icon)
-                        else if showcaseFeed.favicon
-                          img(style="display:inline; max-width:1.4em; vertical-align:middle; margin-right: 0.6em" src=showcaseFeed.favicon)
-                        span.h4(style="vertical-align:middle")
-                          b #{showcaseFeed.title}
-                        p(style="margin-top:0.9em") #{showcaseFeed.description}
-                        if showcaseFeed.author && showcaseFeed.author.name
-                          p
-                            em
-                              | A feed by 
-                              | #{showcaseFeed.author.name}
-                        .small(style="color: #9aa")
-                          - var dateFetched = moment(showcaseFeed.fetched_at)
-                          - var dateNow = new Date()
-                          | Last fetched at 
-                          if !dateFetched.isSame(dateNow, 'day')
-                            | #{moment(showcaseFeed.fetched_at).format("YYYY-MM-DD")} 
-                          | #{moment(showcaseFeed.fetched_at).format("HH:mm")} UTC
 
-            div
-              div.panel.panel-default.panel-showcase.panel-featured-here
+  .row
+    if showcasedFeeds
+      .col-sm-8
+        h2.no-margin-top Showcased feeds
+        for showcaseFeed in showcasedFeeds
+          if showcaseFeed.feed_url
+            a.showcased-feed(href="/feed/?url="+encodeURIComponent(showcaseFeed.feed_url))
+              .panel.panel-default
                 .panel-body
-                  i(class="fa fa-plus-square-o fa-4x" aria-hidden="true")
-                  h3(style="margin-top:0.5em")
-                    b Your feed here?
-                  p
-                    a.btn.btn-primary.btn-sm(target="_blank" href="https://twitter.com/vaillancourtmax") 
-                      | Reach out on Twitter!
-                      i(style="margin-left:0.4em;" class="fa fa-external-link" aria-hidden="true")
+                  if showcaseFeed.icon
+                    img.showcased-feed__image(src=showcaseFeed.icon)
+                  else if showcaseFeed.favicon
+                    img.showcased-feed__image(src=showcaseFeed.favicon)
+                  .showcased-feed__title
+                    | #{showcaseFeed.title}
+                  .showcased-feed__description
+                    p #{showcaseFeed.description}
+                  if showcaseFeed.author && showcaseFeed.author.name
+                    p
+                      em
+                        | A feed by 
+                        | #{showcaseFeed.author.name}
+                  .showcased-feed__fetched-at
+                    - var dateFetched = moment(showcaseFeed.fetched_at)
+                    - var dateNow = new Date()
+                    | Last fetched 
+                    = dateFetched.from(moment(dateNow))
 
-      if latestFeeds
-        .col-sm-4
-          h3(style="margin-top:0;") Recently viewed feeds
-          for recentFeed in latestFeeds
-            if recentFeed.feed_url
-              a(href="/feed/?url="+encodeURIComponent(recentFeed.feed_url))
-                div.item-showcase
-                  div.panel.panel-default.panel-showcase
-                    .panel-body
-                      if recentFeed.icon
-                        img(style="max-width:1.3em; margin-right: 0.4em" src=recentFeed.icon)
-                      else if recentFeed.favicon
-                        img(style="max-width:1.3em; margin-right: 0.4em" src=recentFeed.favicon)
-                      b #{recentFeed.title}
-                      p(style="margin-top:0.6em") #{recentFeed.description}
-                      if recentFeed.author && recentFeed.author.name
-                        p
-                          em
-                            | A feed by 
-                            | #{recentFeed.author.name}
-                      .small(style="color: #9aa")
-                        - var dateFetched = moment(recentFeed.fetched_at)
-                        - var dateNow = new Date()
-                        | Last fetched at 
-                        if !dateFetched.isSame(dateNow, 'day')
-                          | #{moment(recentFeed.fetched_at).format("YYYY-MM-DD")} 
-                        | #{moment(recentFeed.fetched_at).format("HH:mm")} UTC
+        .your-feed-here.panel.panel-default
+          .panel-body
+            i.fa.fa-plus-square-o.fa-4x(aria-hidden="true")
+            h3.your-feed-here__text
+              b Your feed here?
+            p
+              a.btn.btn-primary.btn-sm(target="_blank" href="https://twitter.com/vaillancourtmax") 
+                | Reach out on Twitter!
+                i.fa.fa-external-link.fa-margin-left(aria-hidden="true")
+
+    if latestFeeds
+      .col-sm-4
+        h3.no-margin-top Other users are reading...
+        for recentFeed in latestFeeds
+          if recentFeed.feed_url
+            a.showcased-feed(href="/feed/?url="+encodeURIComponent(recentFeed.feed_url))
+              .panel.panel-default
+                .panel-body
+                  if recentFeed.icon
+                    img.showcased-feed__image(src=recentFeed.icon)
+                  else if recentFeed.favicon
+                    img.showcased-feed__image(src=recentFeed.favicon)
+                  .showcased-feed__title--small
+                    | #{recentFeed.title}
+                  .showcased-feed__description
+                    p #{recentFeed.description}
+                  if recentFeed.author && recentFeed.author.name
+                    p
+                      em
+                        | A feed by 
+                        | #{recentFeed.author.name}
+                  .showcased-feed__fetched-at
+                    - var dateFetched = moment(recentFeed.fetched_at)
+                    - var dateNow = new Date()
+                    | Last fetched 
+                    = dateFetched.from(moment(dateNow))

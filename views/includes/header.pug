@@ -1,0 +1,31 @@
+div.text-right
+  i.text-info.fa.fa-question-circle.fa-margin-right(aria-hidden="true")
+  | What is a JSON feed? 
+  span
+    a(target="_blank" href="https://jsonfeed.org/2017/05/17/announcing_json_feed")
+      | Learn more
+      i.fa.fa-external-link.fa-margin-left(aria-hidden="true")
+
+.header
+  h1.no-margin-top
+    img.header__logo(src="/img/curlybraces.svg")
+    span.header__text JSON Feed Viewer
+  p.lead
+    | Browse through the 
+    a(href="/") showcased feeds
+    | , enter a feed URL below.
+
+form.form(method="get" action="/feed")
+  .input-group
+    input.form-control(type='text', name="url", placeholder='Feed URL (.json, .rss, .atom)')
+    span.input-group-btn
+      button.btn.btn-success(type='submit') Go
+
++flash-messages(messages)
+
+.changelog
+  i.fa.fa-star.fa-margin-right(aria-hidden='true')
+  | Now supporting RSS and Atom feeds thanks to 
+  a(target="_blank" href="https://feed2json.org/")
+    | Andrew Chilton's feed2json.org service
+    i.fa.fa-external-link.fa-margin-left(aria-hidden="true")

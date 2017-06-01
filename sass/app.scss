@@ -1,0 +1,138 @@
+/****************************************************
+  Base
+****************************************************/
+* {
+  box-sizing: border-box !important;
+}
+
+body{
+  border-top:5px solid #18bc9c;
+  padding-top:1.5em;
+  overflow-x: hidden;
+}
+
+hr{
+  margin:1em 0 2em;
+}
+
+img {
+  border-radius: 5px;
+  max-width:100%;
+}
+
+/****************************************************
+  BEM
+****************************************************/
+.header{
+}
+  
+.header__logo{
+  vertical-align:middle;
+  margin-right:0.2em;
+  height:1.1em;
+  margin-top:0.1em;
+}
+
+.header__text{
+  vertical-align:middle;
+}
+
+
+.feed-sidebar{
+}
+
+.feed-sidebar__icon{
+  margin-bottom:20px;
+  max-width:50px;
+}
+
+.feed__image{
+  margin:2em 0;
+  max-height:25em;
+}
+
+.form{
+  margin-bottom:1.2em;
+}
+
+.showcased-feed{
+  color: #2c3e50;
+  &:hover{
+    text-decoration: none;
+    color: lighten(#2c3e50,20);
+  }
+}
+
+.showcased-feed__image{
+  display:inline;
+  max-width:1.4em;
+  vertical-align:middle;
+  margin-right: 0.6em;
+}
+
+.showcased-feed__title{
+  vertical-align:middle;
+  display: inline-block;
+  font-size:1.3em;
+  font-weight: bold;
+
+  &--small{
+    @extend .showcased-feed__title;
+    font-size:1em;
+  }
+}
+
+.showcased-feed__description{
+  margin-top:0.7em;
+}
+
+.showcased-feed__fetched-at{
+  color: #aaa;
+  font-size:0.85em;
+}
+
+.your-feed-here{
+}
+
+.your-feed-here__text{
+  margin-top:0.4em;
+  margin-bottom:0.6em;
+}
+
+.changelog{
+}
+
+.footer{
+  padding:1em 0;
+}
+
+/****************************************************
+  Utility
+****************************************************/
+.no-margin-top{
+  margin-top:0;
+}
+
+/****************************************************
+  Bootstrap Extensions
+****************************************************/
+.panel-featured-here{
+  background: #18bc9c !important;
+  color: white;
+}
+
+.alert a{
+  color: white;
+  text-decoration:underline;
+}
+
+/****************************************************
+  Font Awesome Extensions
+****************************************************/
+.fa-margin-left {
+  margin-left:0.4em;
+}
+
+.fa-margin-right {
+  margin-right:0.4em;
+}

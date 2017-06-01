@@ -1,15 +1,15 @@
-/*---------------------------------------------------------------------
+/**********************************************************************
   Dependencies
----------------------------------------------------------------------*/
+**********************************************************************/
 var express = require('express');
 var router = express.Router();
 var request = require("request");
 var utils = require("../helpers/utils")
 var redisCache = require('redis').createClient(process.env.REDIS_URL);
 
-/*---------------------------------------------------------------------
-  Feed Display GET
----------------------------------------------------------------------*/
+/**********************************************************************
+  Feed Display (GET)
+**********************************************************************/
 router.get('/',
 
   function ajaxRequest(req, res, next) {
@@ -34,7 +34,6 @@ router.get('/',
             }
           })
 
-
           if(feedType == "json"){
             
             var parsedJson;
@@ -42,12 +41,12 @@ router.get('/',
             res.locals.feedType = "json"
 
             try {
-                parsedJson = JSON.parse(rawData);
+              parsedJson = JSON.parse(rawData);
             } catch(e) {
               req.flash("error", "Error while parsing the JSON feed.")
               return res.redirect("/");
             }
-            var parsedJson = JSON.parse(rawData);
+
             if(parsedJson.hasOwnProperty('err')){
               req.flash("error", "There was an error while preparing the feed to be displayed.")
               return res.redirect("/");
@@ -90,7 +89,7 @@ router.get('/',
                   var parsedConvertedJson;
 
                   try {
-                      parsedConvertedJson = JSON.parse(converterRawData);
+                    parsedConvertedJson = JSON.parse(converterRawData);
                   } catch(e) {
                     req.flash("error", "Error while parsing the converted feed.")
                     return res.redirect("/");
@@ -107,7 +106,6 @@ router.get('/',
                       parsedConvertedJson.feed_url = req.query.url.toLowerCase().trim()
                     }
                     res.locals.data = parsedConvertedJson;
-                    console.log(parsedConvertedJson)
 
                     // push data to the redis cache (expires after 72 hours)
                     redisCache.setex(encodeURIComponent(req.query.url.toLowerCase().trim()), 60*60*72, JSON.stringify(parsedConvertedJson), function(){
@@ -129,7 +127,7 @@ router.get('/',
             });
           }
           else{
-            // not json, nor xml or atom
+            // not json, nor xml
             req.flash("error", "Unexpected MIME type. Please make sure you are entering a JSON, RSS, or Atom feed URL.")
             return res.redirect("/");
           }
@@ -155,7 +153,7 @@ router.get('/',
 
 );
 
-/*---------------------------------------------------------------------
+/**********************************************************************
   Exports
----------------------------------------------------------------------*/
+**********************************************************************/
 module.exports = router;

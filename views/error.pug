@@ -1,6 +1,12 @@
-extends layout
+extends layouts/default
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  h1 Hmm. There was a problem.
+  p.lead
+    | Head back 
+    a(href="/") home
+    |  and try again.
+  if error
+    h2= error.status
+    h3= message
+    pre #{error.stack}

@@ -1,37 +1,25 @@
-extends layout
+extends layouts/default
 
 block content
   script.
+    // normalize feed styling
     $(document).ready(function () {
-      $('#feed-content style').remove()
+      $('.feed__content style').remove()
       $("table").addClass("table")
     });
+
   if data
     .row
-      .col-md-3
-        p.lead(style="padding-top:1em")
-          img(src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Parentesi_Graffe.svg" style="vertical-align:middle; margin-right:0.3em; height:1.2em;")
-          span(style="vertical-align:middle;")
-            a(href="/")
-              b JSON Feed Viewer
-      .col-md-9
-        span Load another feed...
-        form.form(method="get" action="/feed")
-          .input-group
-            input.form-control(type='text', name="url", placeholder='Feed URL (.json, .rss, .atom)')
-            span.input-group-btn
-              button.btn.btn-success(type='submit') Go
-    +flash-messages(messages)
-    hr
-    .row
       .col-sm-3
-        .small: b CURRENT FEED
+        .small
+          b CURRENT FEED
         br
         a(href=data.home_page_url)
+          .feed-sidebar
           if data.icon
-            img(style="margin-bottom:20px; max-width:50px;" src=data.icon)
+            img.feed-sidebar__icon(src=data.icon)
           else if data.favicon
-            img(style="margin-bottom:20px; max-width:50px;" src=data.favicon)
+            img.feed-sidebar__icon(src=data.favicon)
             
         p
           a(href=data.home_page_url)
@@ -44,26 +32,28 @@ block content
               = data.author.name
         p.label.label-default= feedType.toUpperCase()
         hr
+
       .col-sm-9
         if data.items
           for i in data.items
             if i.external_url
               a(target="_blank" href=i.external_url)
-                h1(style="margin-top:0;")= i.title
+                h1.no-margin-top= i.title
             else
-              h1(style="margin-top:0;")= i.title
+              h1.no-margin-top= i.title
             p
               if i.url
                 a(target="_blank" href=i.url)
                   | Permalink
-                  i(style="margin-left:0.4em;" class="fa fa-external-link" aria-hidden="true")
+                  i.fa.fa-external-link.fa-margin-left(aria-hidden="true")
+                  |  - 
               if i.date_published
                 - var datePublished = moment(i.date_published)
               if i.date_modified
                 - var dateModified = moment(i.date_modified)
 
               if datePublished
-                |  - Posted on 
+                | Posted on 
                 = datePublished.format("YYYY-MM-DD HH:mm")
                 if dateModified && !dateModified.isSame(datePublished, "minute")
                   span
@@ -76,13 +66,15 @@ block content
                       = dateModified.format("YYYY-MM-DD HH:mm")
 
             if i.image
-              img(src=i.image style="margin:2em 0; max-height:25em")
+              img.feed__image(src=i.image)
             else if i.banner_image
-              img(src=i.banner_image style="margin:2em 0; max-height:25em")
+              img.feed__image(src=i.banner_image)
 
-            #feed-content
+            .feed__content
               if i.content_html
                 p!= i.content_html
               else if i.content_text
                 p!= i.content_text
             hr
+  else
+    p.lead Hmm. Something failed. Try another feed.
