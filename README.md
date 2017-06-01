@@ -4,6 +4,19 @@ This is a webapp that allows to view JSON feeds. See it in action here: https://
 
 ## Getting Started
 
+### Prerequisites
+
+The app was tested on the following configuration:
+
+- Ubuntu 16.04
+- npm 3.8.9
+- Node v6.2.0
+- Redis 3.2.9
+
+0. Install Redis
+
+Install a local Redis server by following [these instructions](https://redis.io/topics/quickstart).
+
 1. Clone the repo
 
 ```
@@ -21,14 +34,6 @@ cd json-feed-viewer && npm install
 ```
 npm start
 ```
-
-### Prerequisites
-
-The app was tested on the following configuration:
-
-- Ubuntu 16.04
-- NPM
-- Node v6.2.0+
 
 ## Deployment
 
