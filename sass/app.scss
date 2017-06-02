@@ -24,17 +24,25 @@ img {
   BEM
 ****************************************************/
 .header{
+  margin-top:1em;
 }
   
 .header__logo{
   vertical-align:middle;
   margin-right:0.2em;
-  height:1.1em;
+  height:0.9em;
   margin-top:0.1em;
 }
 
 .header__text{
   vertical-align:middle;
+  @media(max-width:767px){
+    font-size:0.8em;
+  }
+}
+
+.header__instructions{
+  font-size:1.2em;
 }
 
 

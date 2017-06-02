@@ -5,7 +5,7 @@ block content
   .row
     if showcasedFeeds
       .col-sm-8
-        h2.no-margin-top Showcased feeds
+        h3#showcased-feeds.no-margin-top Showcased feeds
         for showcaseFeed in showcasedFeeds
           if showcaseFeed.feed_url
             a.showcased-feed(href="/feed/?url="+encodeURIComponent(showcaseFeed.feed_url))
@@ -42,7 +42,7 @@ block content
 
     if latestFeeds
       .col-sm-4
-        h3.no-margin-top Other users are reading...
+        h3#latest-feeds.no-margin-top Other users are reading...
         for recentFeed in latestFeeds
           if recentFeed.feed_url
             a.showcased-feed(href="/feed/?url="+encodeURIComponent(recentFeed.feed_url))
