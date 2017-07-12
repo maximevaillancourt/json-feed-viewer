@@ -29,7 +29,7 @@ router.get('/',
 
           // check what mimetype we have
           utils.mimeTypes.forEach(function(m){
-            if (requestResponse.headers["content-type"].indexOf(m.mimetype) > -1){
+            if (requestResponse.headers["content-type"] && requestResponse.headers["content-type"].indexOf(m.mimetype) > -1){
               feedType = m.feedtype;
             }
           })
