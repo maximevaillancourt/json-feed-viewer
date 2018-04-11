@@ -22,6 +22,7 @@ module.exports.mimeTypes = [
   { mimetype: "application/rdf+xml",   feedtype: "xml" },
   { mimetype: "application/atom+xml",  feedtype: "xml" },
   { mimetype: "application/xml",       feedtype: "xml" },
+  { mimetype: "application/x-rss+xml", feedtype: "xml" },
   { mimetype: "text/xml",              feedtype: "xml" },
   { mimetype: "application/json",      feedtype: "json" },
 ]
