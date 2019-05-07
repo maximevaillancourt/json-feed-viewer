@@ -3,6 +3,17 @@ include ../mixins/flash-messages
 doctype html
 html
   head
+    .
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12983457-21"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-12983457-21');
+      </script>
+
     title
       if data && data.title
         = data.title
