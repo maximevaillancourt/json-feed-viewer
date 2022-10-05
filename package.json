@@ -16,7 +16,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.2",
     "helmet": "^3.6.1",
-    "moment": "^2.18.1",
+    "moment": "^2.29.4",
     "morgan": "^1.9.1",
     "node-sass": "^4.5.3",
     "node-sass-middleware": "^0.11.0",
